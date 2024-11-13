@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 1. Update repositories, install Nginx, and install git to fetch the repository
+# Update repositories, install Nginx, and install git to fetch the repository
 apt update
 apt install -y nginx git vsftpd
 
