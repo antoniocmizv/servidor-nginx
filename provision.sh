@@ -69,3 +69,28 @@ sudo systemctl status nginx
 sudo systemctl restart vsftpd
 
 
+#Acceso mediante SSL
+sudo cp /vagrant/example.com /etc/nginx/sites-available/
+
+#Copy the website files to the new directory
+sudo cp -r /vagrant/simplewebsite /var/www/example.com/html
+
+# Create a symbolic link in sites-enabled
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+
+# configure the firewall
+sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+sudo ufw --force enable
+
+# Restart Nginx to apply changes
+sudo systemctl restart nginx
+
+# Create the SSL certificate
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=ES/ST=Granada/L=Granada/O=Global Security/OU=IES ZAIDIN VERGELES/CN=example.com"
+
+
+
+

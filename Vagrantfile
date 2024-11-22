@@ -5,5 +5,6 @@ Vagrant.configure("2") do |config|
       nginx.vm.hostname = "servidor-nginx"
       nginx.vm.network "private_network", ip: "192.168.10.10"
       nginx.vm.provision "shell", path: "provision.sh"
+      
     end
   end
